@@ -31,6 +31,9 @@
  #define SO2_AUX A1  //Auxiliary Electrode
 
  #define DBG_LED 13
+ #define BUZZ_PIN A3
+ #define ESW_PIN  A2
+ #define TH_PIN   A6
 
  #define BAUDRATE 115200
 

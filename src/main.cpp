@@ -47,11 +47,14 @@ void loop() {
     int SO2_WE_Value  = analogRead(SO2_WE);  //this is the SO2 Working Eletrode value (0-1023)
     int SO2_AUX_Value = analogRead(SO2_AUX); //this is the Auxialary electrode, which is not exposed to any air to be used as a reference for stability.
 
-    //Serial.print("SO2 Working Eletrode: ");
-    //Serial.println(SO2_WE_Value);
-    //Serial.print("SO2 Auxialary electrode: );
-    //Serial.println(SO2_AUX_Value);
+    /*
+    Serial.print("SO2 Working Eletrode: ");
+    Serial.println(SO2_WE_Value);
+    Serial.print("SO2 Auxialary electrode: ");
+    Serial.println(SO2_AUX_Value);
+    */
 
+   
     // Convert the analog reading (which goes from 0 - 1023) to a voltage (0 - 5000mV), and correct by subtacting the electronic zero(mV) of each, giving us the real mV of each:
     float SO2_WE_mV  = (SO2_WE_Value  * (Vin / 1023.0)) - ElecZero_SO2_WE_mV;
     float SO2_AUX_mV = (SO2_AUX_Value * (Vin / 1023.0)) - ElecZero_SO2_Aux_mV;

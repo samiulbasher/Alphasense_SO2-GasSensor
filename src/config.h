@@ -1,15 +1,11 @@
 #ifndef config_h
  #define config_h
 
- /*!
-  ### pin connection
+ #define BAUDRATE 115200
 
-  # LCD(16x2) with module
-  * @ GND = GND
-  * @ VCC = VCC (5v)
-  * @ SDA = SDA
-  * @ SCL = SCL
- */
+ #define LCD_WIDTH  16
+ #define LCD_HEIGHT 2
+
  #define LCD_RS 5
  #define LCD_EN 6
  #define LCD_D4 7
@@ -30,12 +26,10 @@
  #define SO2_WE  A0  //Working Electrode
  #define SO2_AUX A1  //Auxiliary Electrode
 
- #define DBG_LED 13
+ #define DBG_LED  13
  #define BUZZ_PIN A3
  #define ESW_PIN  A2
  #define TH_PIN   A6
-
- #define BAUDRATE 115200
 
  int dataSelection(int a[], int n);
 

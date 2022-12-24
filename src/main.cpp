@@ -23,13 +23,15 @@ void setup() {
   // put your setup code here, to run once:
 
   Serial.begin(BAUDRATE);
-  lcd.begin(16, 2);
+  lcd.begin(LCD_WIDTH, LCD_HEIGHT);
 
   //Define analog pins as input readers for incoming voltage values
   pinMode(SO2_WE,  INPUT); //SO2 WE
   pinMode(SO2_AUX, INPUT); //SO2 AUX
 
   pinMode(DBG_LED, OUTPUT);
+  pinMode(BUZZ_PIN, OUTPUT);
+  pinMode(TH_PIN, INPUT);
 
 
   Serial.println(">start");
@@ -69,8 +71,9 @@ void loop() {
 
   int SO2 = dataSelection(ppb_SO2, samples);
   if(SO2 < 0) SO2 = 0;
-  String gas = "SO2:" + String(SO2) + "ppb   ";
-  lcd.setCursor(3, 0);
+  String gas = "SO2:" + String(SO2) + "ppb";
+
+  lcd.setCursor((LCD_WIDTH - gas.length()) / 2, 0); //center the lcd text
   lcd.print(gas);
   Serial.println(gas);
 

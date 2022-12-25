@@ -31,6 +31,10 @@
  #define ESW_PIN  A2
  #define TH_PIN   A6
 
+ #define LONG_BEEP 0
+ #define SHORT_BEEP 1
+
  int dataSelection(int a[], int n);
+ void beeper(uint8_t numOfBeep, uint8_t beepPattern);
 
 #endif

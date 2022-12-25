@@ -99,3 +99,19 @@ int dataSelection(int a[], int n) {
   }
   return maxValue;
 }
+
+void beeper(uint8_t numOfBeep, uint8_t beepPattern)
+{
+  uint16_t beepDelay;
+  
+  if(beepPattern == SHORT_BEEP)  beepDelay = 10;
+  if(beepPattern == LONG_BEEP )  beepDelay = 300;
+
+  for (int i = 0; i < numOfBeep; i++)
+  {
+    digitalWrite(BUZZ_PIN, HIGH);
+    delay(beepDelay);
+    digitalWrite(BUZZ_PIN, LOW);
+    delay(beepDelay);
+  }
+}

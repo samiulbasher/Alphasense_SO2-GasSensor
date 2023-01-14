@@ -1,7 +1,10 @@
 #include <Arduino.h>
 #include <LiquidCrystal.h>
 
+#include <stdint.h>
+
 #include "config.h"
+#include "thermistor.h"
 
 
 LiquidCrystal lcd(LCD_RS, LCD_EN, LCD_D4, LCD_D5, LCD_D6, LCD_D7);
@@ -19,6 +22,9 @@ uint8_t samples = 60; // number of samples taken to determine the mode in mode f
 int ppb_SO2[60]; //arrays holding multiple data samples, used in mode function to pick reoccuring value
 
 
+unsigned long previous_time = 0;
+unsigned long wait_updateTime = 1000;    //we will check the sensor 1 times a second
+
 void setup() {
   // put your setup code here, to run once:
 
@@ -31,8 +37,8 @@ void setup() {
 
   pinMode(DBG_LED, OUTPUT);
   pinMode(BUZZ_PIN, OUTPUT);
-  pinMode(TH_PIN, INPUT);
 
+  thermitor_Init();
 
   Serial.println(">start");
 }
@@ -79,6 +85,20 @@ void loop() {
   lcd.setCursor((LCD_WIDTH - gas.length()) / 2, 0); //center the lcd text
   lcd.print(gas);
   Serial.println(gas);
+
+  
+  #if ENABLED(DISPLAY_TEMPERATURE)
+    // read thermistor and display in 2nd line
+    if((millis() - previous_time) > wait_updateTime) //check every 1 times in a secound
+    {
+      previous_time = millis();
+      String temperature = "R.Temp: " + String(round(analog2temp())) + (char)223 +"C";
+
+      lcd.setCursor((LCD_WIDTH - temperature.length()) / 2, 1); //center the lcd text
+      lcd.print(temperature);
+      //Serial.println(temperature);
+    }
+  #endif //DISPLAY_TEMPERATURE
 
   digitalWrite(DBG_LED,LOW);
 }

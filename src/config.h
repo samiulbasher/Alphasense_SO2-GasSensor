@@ -3,6 +3,8 @@
 
  #define BAUDRATE 115200
 
+ #define DISPLAY_TEMPERATURE
+
  #define LCD_WIDTH  16
  #define LCD_HEIGHT 2
 
@@ -29,12 +31,17 @@
  #define DBG_LED  13
  #define BUZZ_PIN A3
  #define ESW_PIN  A2
- #define TH_PIN   A6
+ #define TH_PIN   A7
 
  #define LONG_BEEP 0
  #define SHORT_BEEP 1
 
  int dataSelection(int a[], int n);
  void beeper(uint8_t numOfBeep, uint8_t beepPattern);
+
+ // Macros to support option testing
+ #define _CAT(a, ...) a ## __VA_ARGS__   
+ #define SWITCH_ENABLED_      1
+ #define ENABLED(b) _CAT(SWITCH_ENABLED_, b)
 
 #endif

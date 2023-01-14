@@ -13,7 +13,7 @@ float ElecZero_SO2_Aux_mV = 341; //[usually:340mV] similarly , the electronic ze
 float SO2_Sensitivity = 0.300;   //[usually:300nA/ppm] the sensitivity of the SO2 sensor in (mV/ppb)
 
 
-float Vin = 5000;//4720;  //This is the input voltage(mV), that we want to be stable, using bypass capacitors and a linear regulator. its better to do not use the Arduino as a voltage source.
+float Vin = 4980;//4720;  //This is the input voltage(mV), that we want to be stable, using bypass capacitors and a linear regulator. its better to do not use the Arduino as a voltage source.
 
 uint8_t samples = 60; // number of samples taken to determine the mode in mode function
 int ppb_SO2[60]; //arrays holding multiple data samples, used in mode function to pick reoccuring value
@@ -74,7 +74,7 @@ void loop() {
 
   int SO2 = dataSelection(ppb_SO2, samples);
   if(SO2 < 0) SO2 = 0;
-  String gas = "SO2:" + String(SO2) + "ppb";
+  String gas = " SO2:" + String(SO2) + "ppb ";
 
   lcd.setCursor((LCD_WIDTH - gas.length()) / 2, 0); //center the lcd text
   lcd.print(gas);
